@@ -1,0 +1,14 @@
+steps:
+  - name: maven:3-jdk-8
+    entrypoint: mvn
+    args: ['package','-Dmaven.test.skip=true']
+  - name: veracode/pipeline-scan:latest
+    entrypoint: 'bash'
+    args: ['-c', 'java -jar pipeline-scan.jar --veracode_api_id "${VERACODE_ID}" --veracode_api_key "${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "./target/verademo.war"']
+    secretEnv: ['VERACODE_ID', 'VERACODE_KEY']
+availableSecrets:
+  secretManager:
+    - versionName: projects/864317778079/secrets/VERACODE_ID/versions/latest
+      env: 'VERACODE_ID'
+    - versionName: projects/864317778079/secrets/VERACODE_KEY/versions/latest
+      env: 'VERACODE_KEY'
