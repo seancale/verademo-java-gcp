@@ -4,7 +4,7 @@ steps:
     args: ['package','-Dmaven.test.skip=true']
   - name: veracode/pipeline-scan:latest
     entrypoint: 'bash'
-    args: ['-c', 'java -jar /opt/veracode/pipeline-scan.jar --veracode_api_id "$${VERACODE_ID}" --veracode_api_key "$${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "./target/verademo.war" -jf results/verademo_results.json']
+    args: ['-c', 'java -jar /opt/veracode/pipeline-scan.jar --veracode_api_id "$${VERACODE_ID}" --veracode_api_key "$${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "../target/verademo.war" -jf "./results/verademo_results.json"']
     secretEnv: ['VERACODE_ID', 'VERACODE_KEY']
     dir: 'results'
 #   - name: veracode/api-wrapper-java:latest
