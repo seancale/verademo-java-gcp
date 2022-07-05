@@ -8,7 +8,7 @@ steps:
 #    secretEnv: ['VERACODE_ID', 'VERACODE_KEY']
   - name: veracode/api-wrapper-java:latest
     entrypoint: 'bash'
-    args: [ '-c', 'java -jar /opt/veracode/api-wrapper.jar -vid "$${VERACODE_ID}" -vkey "$${VERACODE_KEY}" -action UploadAndScan -createprofile true -appname ${REPO_NAME} -version "${SHORT_SHA}" -sandboxname "gcp testing" -createsandbox true  -scantimeout 30 -filepath ./target/verademo.war' ]
+    args: [ '-c', 'java -jar /opt/veracode/api-wrapper.jar -vid "$${VERACODE_ID}" -vkey "$${VERACODE_KEY}" -action UploadAndScan -createprofile true -appname ${REPO_NAME} -version "$(date +%F_%H:%M:%S)_${SHORT_SHA}" -sandboxname "gcp testing" -createsandbox true  -scantimeout 30 -filepath ./target/verademo.war' ]
     secretEnv: [ 'VERACODE_ID', 'VERACODE_KEY' ]
 timeout: 900s
 availableSecrets:
