@@ -3,10 +3,15 @@ steps:
     entrypoint: mvn
     args: ['package','-Dmaven.test.skip=true']
   - name: veracode/pipeline-scan:latest
+    volumes:
+    - name: 'vol1'
+      path: '/persistent_volume'
     entrypoint: 'bash'
     args: ['-c', 'java -jar /opt/veracode/pipeline-scan.jar --veracode_api_id "$${VERACODE_ID}" --veracode_api_key "$${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "/workspace/target/verademo.war" --json_output_file "verademo_results.json"']
     secretEnv: ['VERACODE_ID', 'VERACODE_KEY']
-    dir: '/tmp'
+    # The below directory is needed to account for the json output files. The Veracode docker user does not have permission 
+    # to write directly to the workspace provided by google cloud. Need to work on method to persist the results file
+    dir: '/persistent_volume'
 #   - name: veracode/api-wrapper-java:latest
 #     entrypoint: 'bash'
 #     args: [ '-c', 'java -jar /opt/veracode/api-wrapper.jar -vid "$${VERACODE_ID}" -vkey "$${VERACODE_KEY}" -action UploadAndScan -createprofile true -appname ${REPO_NAME} -version "${SHORT_SHA}_$(date +%F_%H:%M:%S)" -sandboxname "gcp testing" -createsandbox true  -scantimeout 30 -filepath ./target/verademo.war' ]
