@@ -5,8 +5,8 @@ steps:
   - name: maven:3-jdk-8
     entrypoint: 'bash'
     args: ['-c', 'curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan --recursive --update-advisor --debug']
-    env:
-    - 'SRCCLR_API_TOKEN=$${SRCCLR_API_TOKEN}'
+#     env:
+#     - 'SRCCLR_API_TOKEN=$${SRCCLR_API_TOKEN}'
     secretEnv: ['SRCCLR_API_TOKEN']
 #   - name: veracode/pipeline-scan:latest
 #     volumes:
