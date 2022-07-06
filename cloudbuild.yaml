@@ -13,7 +13,7 @@ steps:
     - name: 'vol1'
       path: '/home/luser'
     entrypoint: 'bash'
-    args: ['-c', 'curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan $EXTRA_ARGS --veracode_api_key "$${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "/workspace/target/verademo.war"']
+    args: ['-c', 'java -jar /opt/veracode/pipeline-scan.jar --veracode_api_id "$${VERACODE_ID}" --veracode_api_key "$${VERACODE_KEY}" --fail_on_severity="Very High, High" --file "/workspace/target/verademo.war"']
     secretEnv: ['VERACODE_ID', 'VERACODE_KEY']
     # The below directory is needed to account for the json output files. The Veracode docker user does not have permission 
     # to write directly to the workspace provided by google cloud. Need to work on method to persist the results file
