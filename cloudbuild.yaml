@@ -30,9 +30,9 @@ steps:
 timeout: 900s
 availableSecrets:
   secretManager:
-    - versionName: projects/864317778079/secrets/VERACODE_ID/versions/latest
-      env: 'VERACODE_ID'
-    - versionName: projects/864317778079/secrets/VERACODE_KEY/versions/latest
-      env: 'VERACODE_KEY'
+#     - versionName: projects/864317778079/secrets/VERACODE_ID/versions/latest
+#       env: 'VERACODE_ID'
+#     - versionName: projects/864317778079/secrets/VERACODE_KEY/versions/latest
+#       env: 'VERACODE_KEY'
     - versionName: projects/864317778079/secrets/SRCCLR_API_TOKEN/versions/latest
       env: 'SRCCLR_API_TOKEN'
