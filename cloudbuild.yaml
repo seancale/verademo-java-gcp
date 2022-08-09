@@ -4,10 +4,10 @@ steps:
     entrypoint: mvn
     args: ['package','-Dmaven.test.skip=true']
     # SCA s an
-  - name: maven:3-jdk-8
-    entrypoint: 'bash'
-    args: ['-c', 'curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan --recursive --update-advisor --debug']
-    secretEnv: ['SRCCLR_API_TOKEN']
+  #- name: maven:3-jdk-8
+  #  entrypoint: 'bash'
+  #  args: ['-c', 'curl -sSL https://download.sourceclear.com/ci.sh | sh -s -- scan --recursive --update-advisor --debug']
+  #  secretEnv: ['SRCCLR_API_TOKEN']
     # Pipeline Scan start
   - name: veracode/pipeline-scan:latest
     volumes:
@@ -35,9 +35,9 @@ steps:
 timeout: 900s
 availableSecrets:
   secretManager:
-    - versionName: projects/$PROJECT_ID/secrets/VERACODE_ID/versions/latest
+    - versionName: projects/$PROJECT_ID/secrets/Sean_Veracode_API_ID/versions/latest
       env: 'VERACODE_ID'
-    - versionName: projects/$PROJECT_ID/secrets/VERACODE_KEY/versions/latest
+    - versionName: projects/$PROJECT_ID/secrets/Sean_Veracode_API_Key/versions/latest
       env: 'VERACODE_KEY'
-    - versionName: projects/$PROJECT_ID/secrets/SRCCLR_API_TOKEN/versions/latest
-      env: 'SRCCLR_API_TOKEN'
+    #- versionName: projects/$PROJECT_ID/secrets/SRCCLR_API_TOKEN/versions/latest
+    #  env: 'SRCCLR_API_TOKEN'
